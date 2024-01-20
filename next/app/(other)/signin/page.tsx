@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import OAuth from "../_components/OAuth";
+import SignUp from "../_components/signup";
 
 export default function SignIn() {
   return (
@@ -18,9 +19,7 @@ export default function SignIn() {
             <Input type="email" placeholder="이메일" />
             <Input type="password" placeholder="비밀번호" className="mt-1" />
             <div className="mt-2 w-full flex justify-end">
-              <Button className="bg-[#8CC444]" asChild>
-                <Link href="/signup">회원가입</Link>
-              </Button>
+              <SignUp />
               <Button type="submit" className="bg-[#4B8500] ml-2">
                 로그인
               </Button>
