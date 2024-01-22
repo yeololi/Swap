@@ -11,7 +11,7 @@ const SignInForm = ({ children }: { children: React.ReactNode }) => {
 
   const onSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:8080/form", {
+      const res = await fetch("http://localhost:8080/upload", {
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },
         body: JSON.stringify({ email: email, password: passward }),
@@ -22,7 +22,7 @@ const SignInForm = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <>
+    <div className="mt-10 rounded-xl w-72 h-48 shadow-xl p-4">
       <div className="flex mb-2">
         <Mail />
         <span className="ml-1">이메일 로그인</span>
@@ -47,7 +47,7 @@ const SignInForm = ({ children }: { children: React.ReactNode }) => {
           로그인
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
