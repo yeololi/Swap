@@ -4,23 +4,23 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.POST("/form", func(c *gin.Context) {
-		form, _ := c.MultipartForm()
-		files := form.File["upload[]"]
+	router.POST("/upload", func(c *gin.Context) {
+		file, _ := c.FormFile("file")
+		log.Println(file.Filename)
 
-		for _, file := range files {
-			log.Println(file.Filename)
+		// Upload the file to specific dst.
+		err := c.SaveUploadedFile(file, "./"+file.Filename)
 
-			// Upload the file to specific dst.
-			c.SaveUploadedFile(file, "./"+file.Filename)
+		if err != nil {
+			c.String(500, "Failed to upload")
+			return
 		}
 		c.String(200, "Upload successful")
 	})
-	r.Run(":8080")
+	router.Run(":8080")
 }
