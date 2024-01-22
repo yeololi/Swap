@@ -9,17 +9,11 @@ func main() {
 	router := gin.Default()
 
 	router.POST("/upload", func(c *gin.Context) {
-		file, _ := c.FormFile("file")
-		log.Println(file.Filename)
-
-		// Upload the file to specific dst.
-		err := c.SaveUploadedFile(file, "./"+file.Filename)
-
+		file, err := c.FormFile("file")
 		if err != nil {
-			c.String(500, "Failed to upload")
-			return
+			log.Fatal(err)
 		}
-		c.String(200, "Upload successful")
+		log.Println(file.Filename)
 	})
 	router.Run(":8080")
 }
