@@ -1,15 +1,16 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
 )
 
 func main() {
 	r := gin.Default()
 
-	r.GET("/form", func(c *gin.Context) {
+	r.POST("/form", func(c *gin.Context) {
 		form, _ := c.MultipartForm()
 		files := form.File["upload[]"]
 
