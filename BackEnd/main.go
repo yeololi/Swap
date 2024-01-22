@@ -9,8 +9,10 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/form", func(c *gin.Context) {
+	r.POST("/upload", func(c *gin.Context) {
 		form, _ := c.MultipartForm()
+		log.Println(form)
+
 		files := form.File["upload[]"]
 
 		for _, file := range files {
