@@ -11,6 +11,8 @@ const SignInForm = ({ children }: { children: React.ReactNode }) => {
 
   const onSubmit = async () => {
     try {
+      console.log(JSON.stringify({ email: email, password: passward }));
+
       const res = await fetch("http://localhost:8080/upload", {
         method: "POST",
         headers: { "Content-Type": "multipart/form-data" },

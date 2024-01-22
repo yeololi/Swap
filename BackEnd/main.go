@@ -9,6 +9,7 @@ type User struct {
 	Age  int    `json:"age"`
 }
 
+
 func main() {
 	router := gin.Default()
 
