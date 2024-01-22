@@ -3,23 +3,24 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
 )
 
+type User struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET("/form", func(c *gin.Context) {
-		form, _ := c.MultipartForm()
-		files := form.File["upload[]"]
-
-		for _, file := range files {
-			log.Println(file.Filename)
-
-			// Upload the file to specific dst.
-			c.SaveUploadedFile(file, "./"+file.Filename)
+	router.POST("/user", func(c *gin.Context) {
+		var user User
+		if err := c.BindJSON(&user); err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
 		}
-		c.String(200, "Upload successful")
+		c.JSON(200, gin.H{"name": user.Name, "age": user.Age})
 	})
-	r.Run(":8080")
+
+	router.Run(":8080")
 }
