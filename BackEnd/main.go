@@ -2,18 +2,24 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 
 func main() {
-	router := gin.Default()
+	r := gin.Default()
 
-	router.POST("/upload", func(c *gin.Context) {
-		file, err := c.FormFile("file")
-		if err != nil {
-			log.Fatal(err)
+	r.GET("/form", func(c *gin.Context) {
+		form, _ := c.MultipartForm()
+		files := form.File["upload[]"]
+
+		for _, file := range files {
+			log.Println(file.Filename)
+
+			// Upload the file to specific dst.
+			c.SaveUploadedFile(file, "./"+file.Filename)
 		}
-		log.Println(file.Filename)
+		c.String(200, "Upload successful")
 	})
-	router.Run(":8080")
+	r.Run(":8080")
 }
