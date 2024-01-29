@@ -188,16 +188,16 @@ const SignUp = () => {
                       value={inputs.Nickname}
                       name={"Nickname"}
                       onChange={onChange}
-                      className="mt-5 border-[1px] rounded-md"
+                      className="border-[1px] rounded-md"
                       placeholder="닉네임"
                       required
                     />
-                    <div className="flex items-center mt-10 ">
+                    <div className="flex items-center mt-7 ">
                       <Input
                         value={inputs.BankAccount}
                         name={"BankAccount"}
                         onChange={onChange}
-                        className="w-52 border-[1px] rounded-md placeholder:font-semibold mr-6"
+                        className="w-56 border-[1px] rounded-md placeholder:font-semibold mr-6"
                         placeholder="계좌번호"
                         required
                       />
@@ -249,11 +249,11 @@ const SignUp = () => {
                       value={inputs.Address}
                       name={"Address"}
                       onChange={onChange}
-                      className="mt-10 border-[1px] rounded-md"
+                      className="mt-7 border-[1px] rounded-md"
                       placeholder="주소"
                       required
                     />
-                    <div className="flex space-x-6 mt-10">
+                    <div className="flex space-x-6 mt-7">
                       <Input
                         value={inputs.Height}
                         name={"Height"}
@@ -271,44 +271,46 @@ const SignUp = () => {
                         required
                       />
                     </div>
-                    <Select
-                      required
-                      onValueChange={(value: string) => {
-                        setInputs({
-                          ...inputs,
-                          ["Gender"]: value,
-                        });
-                      }}
-                    >
-                      <SelectTrigger className="mt-10">
-                        <SelectValue placeholder="성별" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="male">남</SelectItem>
-                        <SelectItem value="femal">여</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Select
-                      required
-                      onValueChange={(value: string) => {
-                        setInputs({
-                          ...inputs,
-                          ["Age"]: value,
-                        });
-                      }}
-                    >
-                      <SelectTrigger className="mt-10">
-                        <SelectValue placeholder="연령" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="10">10대</SelectItem>
-                        <SelectItem value="20">20대</SelectItem>
-                        <SelectItem value="30">30대</SelectItem>
-                        <SelectItem value="40">40대</SelectItem>
-                        <SelectItem value="50">50대</SelectItem>
-                        <SelectItem value="60">60대 이상</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <div className="flex space-x-6 mt-6">
+                      <Select
+                        required
+                        onValueChange={(value: string) => {
+                          setInputs({
+                            ...inputs,
+                            ["Gender"]: value,
+                          });
+                        }}
+                      >
+                        <SelectTrigger className="">
+                          <SelectValue placeholder="성별" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">남</SelectItem>
+                          <SelectItem value="femal">여</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Select
+                        required
+                        onValueChange={(value: string) => {
+                          setInputs({
+                            ...inputs,
+                            ["Age"]: value,
+                          });
+                        }}
+                      >
+                        <SelectTrigger className="">
+                          <SelectValue placeholder="연령" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="10">10대</SelectItem>
+                          <SelectItem value="20">20대</SelectItem>
+                          <SelectItem value="30">30대</SelectItem>
+                          <SelectItem value="40">40대</SelectItem>
+                          <SelectItem value="50">50대</SelectItem>
+                          <SelectItem value="60">60대 이상</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                   <div className="flex justify-end mt-4">
                     <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
