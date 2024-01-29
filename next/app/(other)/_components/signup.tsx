@@ -79,7 +79,8 @@ const SignUp = () => {
     setInputs(nextInputs);
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log(inputs);
   };
 
@@ -125,7 +126,7 @@ const SignUp = () => {
                           value={inputs.Email1}
                           name={"Email1"}
                           onChange={onChange}
-                          className="w-60 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
+                          className="w-52 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
                           placeholder="이메일"
                           required
                         />
@@ -196,19 +197,53 @@ const SignUp = () => {
                           value={inputs.BankAccount}
                           name={"BankAccount"}
                           onChange={onChange}
-                          className="w-60 border-[1px] rounded-md placeholder:font-semibold mr-6"
+                          className="w-52 border-[1px] rounded-md placeholder:font-semibold mr-6"
                           placeholder="계좌번호"
                           required
                         />
 
-                        <Input
-                          value={inputs.Bank}
-                          name={"Bank"}
-                          onChange={onChange}
-                          className="flex-1 border-[1px] rounded-md"
-                          placeholder="은행"
+                        <Select
+                          onValueChange={(value: string) => {
+                            setInputs({
+                              ...inputs,
+                              ["Bank"]: value,
+                            });
+                          }}
                           required
-                        />
+                        >
+                          <SelectTrigger className="">
+                            <SelectValue
+                              placeholder="은행"
+                              className="border-[1px] rounded-md flex-1"
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="국민">KB국민은행</SelectItem>
+                            <SelectItem value="농협">NH농협</SelectItem>
+                            <SelectItem value="카카오">카카오뱅크</SelectItem>
+                            <SelectItem value="신한">신한은행</SelectItem>
+                            <SelectItem value="토스">토스뱅크</SelectItem>
+                            <SelectItem value="우리">우리은행</SelectItem>
+                            <SelectItem value="하나">하나은행</SelectItem>
+                            <SelectItem value="기업">IBK기업은행</SelectItem>
+                            <SelectItem value="새마을">MG새마을금고</SelectItem>
+                            <SelectItem value="부산">부산은행</SelectItem>
+                            <SelectItem value="대구">대구은행</SelectItem>
+                            <SelectItem value="케이">케이뱅크</SelectItem>
+                            <SelectItem value="신협">신협</SelectItem>
+                            <SelectItem value="광주">광주은행</SelectItem>
+                            <SelectItem value="우체국">우체국</SelectItem>
+                            <SelectItem value="제일">SC제일은행</SelectItem>
+                            <SelectItem value="경남">경남은행</SelectItem>
+                            <SelectItem value="수협">수협은행</SelectItem>
+                            <SelectItem value="전북">전북은행</SelectItem>
+                            <SelectItem value="저축">저축은행</SelectItem>
+                            <SelectItem value="제주">제주은행</SelectItem>
+                            <SelectItem value="씨티">씨티은행</SelectItem>
+                            <SelectItem value="산림">산립조합</SelectItem>
+                            <SelectItem value="SBI">SBI저축은행</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       <Input
                         value={inputs.Address}
@@ -239,12 +274,10 @@ const SignUp = () => {
                       <Select
                         required
                         onValueChange={(value: string) => {
-                          const nextInputs = {
+                          setInputs({
                             ...inputs,
                             ["Gender"]: value,
-                          };
-
-                          setInputs(nextInputs);
+                          });
                         }}
                       >
                         <SelectTrigger className="mt-10">
@@ -258,12 +291,10 @@ const SignUp = () => {
                       <Select
                         required
                         onValueChange={(value: string) => {
-                          const nextInputs = {
+                          setInputs({
                             ...inputs,
                             ["Age"]: value,
-                          };
-
-                          setInputs(nextInputs);
+                          });
                         }}
                       >
                         <SelectTrigger className="mt-10">
