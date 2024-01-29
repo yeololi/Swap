@@ -90,7 +90,7 @@ const SignUp = () => {
         <DrawerTrigger asChild>
           <Button className="bg-[#8CC444]">회원가입</Button>
         </DrawerTrigger>
-        <DrawerContent className="mb-8">
+        <DrawerContent>
           <div className="mx-auto w-full max-w-md">
             {page == 1 ? (
               <>
@@ -105,62 +105,62 @@ const SignUp = () => {
                     본인 정보를 입력해주세요
                   </DrawerDescription>
                 </DrawerHeader>
-                <div>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setPage(2);
-                    }}
-                  >
-                    <div className="px-3">
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setPage(2);
+                  }}
+                  className="px-3"
+                >
+                  <div className="grid gap-8">
+                    <Input
+                      value={inputs.name}
+                      name={"name"}
+                      onChange={onChange}
+                      className="border-x-0 border-t-0 border-b-[#BDE09E] border-b-2  rounded-none"
+                      placeholder="이름"
+                      required
+                    />
+                    <div className="flex items-center">
                       <Input
-                        value={inputs.name}
-                        name={"name"}
+                        value={inputs.Email1}
+                        name={"Email1"}
                         onChange={onChange}
-                        className="mt-5 border-x-0 border-t-0 border-b-[#BDE09E] border-b-2  rounded-none"
-                        placeholder="이름"
+                        className="w-52 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
+                        placeholder="이메일"
                         required
                       />
-                      <div className="flex items-center mt-10 ">
-                        <Input
-                          value={inputs.Email1}
-                          name={"Email1"}
-                          onChange={onChange}
-                          className="w-52 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
-                          placeholder="이메일"
-                          required
-                        />
-                        <span className="mx-1 text-xl">@</span>
-                        <Input
-                          value={inputs.Email2}
-                          name={"Email2"}
-                          onChange={onChange}
-                          className="flex-1 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
-                          required
-                        />
-                      </div>
+                      <span className="mx-1 text-xl">@</span>
                       <Input
-                        type={"password"}
-                        value={inputs.Pw}
-                        name={"Pw"}
+                        value={inputs.Email2}
+                        name={"Email2"}
                         onChange={onChange}
-                        className="mt-10 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
-                        placeholder="비밀번호"
+                        className="flex-1 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
                         required
                       />
                     </div>
-                    <CheckGroup />
-                    <div className="flex justify-end">
-                      <Button
-                        type={"submit"}
-                        variant={"ghost"}
-                        className="flex justify-between text-[#8CC444]"
-                      >
-                        다음으로 <ChevronRight />
-                      </Button>
-                    </div>
-                  </form>
-                </div>
+                    <Input
+                      type={"password"}
+                      value={inputs.Pw}
+                      name={"Pw"}
+                      onChange={onChange}
+                      className="rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
+                      placeholder="비밀번호"
+                      required
+                    />
+                  </div>
+                  <CheckGroup />
+                  <div className="flex justify-end">
+                    <Button
+                      type={"submit"}
+                      variant={"ghost"}
+                      className="flex justify-between text-[#8CC444]"
+                    >
+                      다음으로 <ChevronRight />
+                    </Button>
+                  </div>
+                </form>
               </>
             ) : (
               <>
@@ -181,96 +181,97 @@ const SignUp = () => {
                     부가 정보를 입력해주세요
                   </DrawerDescription>
                 </DrawerHeader>
-                <div>
-                  <form onSubmit={onSubmit}>
-                    <div className="px-3">
-                      <Input
-                        value={inputs.Nickname}
-                        name={"Nickname"}
-                        onChange={onChange}
-                        className="mt-5 border-[1px] rounded-md"
-                        placeholder="닉네임"
-                        required
-                      />
-                      <div className="flex items-center mt-10 ">
-                        <Input
-                          value={inputs.BankAccount}
-                          name={"BankAccount"}
-                          onChange={onChange}
-                          className="w-52 border-[1px] rounded-md placeholder:font-semibold mr-6"
-                          placeholder="계좌번호"
-                          required
-                        />
 
-                        <Select
-                          onValueChange={(value: string) => {
-                            setInputs({
-                              ...inputs,
-                              ["Bank"]: value,
-                            });
-                          }}
-                          required
-                        >
-                          <SelectTrigger className="">
-                            <SelectValue
-                              placeholder="은행"
-                              className="border-[1px] rounded-md flex-1"
-                            />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="국민">KB국민은행</SelectItem>
-                            <SelectItem value="농협">NH농협</SelectItem>
-                            <SelectItem value="카카오">카카오뱅크</SelectItem>
-                            <SelectItem value="신한">신한은행</SelectItem>
-                            <SelectItem value="토스">토스뱅크</SelectItem>
-                            <SelectItem value="우리">우리은행</SelectItem>
-                            <SelectItem value="하나">하나은행</SelectItem>
-                            <SelectItem value="기업">IBK기업은행</SelectItem>
-                            <SelectItem value="새마을">MG새마을금고</SelectItem>
-                            <SelectItem value="부산">부산은행</SelectItem>
-                            <SelectItem value="대구">대구은행</SelectItem>
-                            <SelectItem value="케이">케이뱅크</SelectItem>
-                            <SelectItem value="신협">신협</SelectItem>
-                            <SelectItem value="광주">광주은행</SelectItem>
-                            <SelectItem value="우체국">우체국</SelectItem>
-                            <SelectItem value="제일">SC제일은행</SelectItem>
-                            <SelectItem value="경남">경남은행</SelectItem>
-                            <SelectItem value="수협">수협은행</SelectItem>
-                            <SelectItem value="전북">전북은행</SelectItem>
-                            <SelectItem value="저축">저축은행</SelectItem>
-                            <SelectItem value="제주">제주은행</SelectItem>
-                            <SelectItem value="씨티">씨티은행</SelectItem>
-                            <SelectItem value="산림">산립조합</SelectItem>
-                            <SelectItem value="SBI">SBI저축은행</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+                <form onSubmit={onSubmit} className="px-3">
+                  <div>
+                    <Input
+                      value={inputs.Nickname}
+                      name={"Nickname"}
+                      onChange={onChange}
+                      className="border-[1px] rounded-md"
+                      placeholder="닉네임"
+                      required
+                    />
+                    <div className="flex items-center mt-7 ">
                       <Input
-                        value={inputs.Address}
-                        name={"Address"}
+                        value={inputs.BankAccount}
+                        name={"BankAccount"}
                         onChange={onChange}
-                        className="mt-10 border-[1px] rounded-md"
-                        placeholder="주소"
+                        className="w-56 border-[1px] rounded-md placeholder:font-semibold mr-6"
+                        placeholder="계좌번호"
                         required
                       />
-                      <div className="flex space-x-6 mt-10">
-                        <Input
-                          value={inputs.Height}
-                          name={"Height"}
-                          onChange={onChange}
-                          className="flex-1 border-[1px] rounded-md"
-                          placeholder="키(cm)"
-                          required
-                        />
-                        <Input
-                          value={inputs.Weight}
-                          name={"Weight"}
-                          onChange={onChange}
-                          className="flex-1 border-[1px] rounded-md"
-                          placeholder="체중(kg)"
-                          required
-                        />
-                      </div>
+
+                      <Select
+                        onValueChange={(value: string) => {
+                          setInputs({
+                            ...inputs,
+                            ["Bank"]: value,
+                          });
+                        }}
+                        required
+                      >
+                        <SelectTrigger className="">
+                          <SelectValue
+                            placeholder="은행"
+                            className="border-[1px] rounded-md flex-1"
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="국민">KB국민은행</SelectItem>
+                          <SelectItem value="농협">NH농협</SelectItem>
+                          <SelectItem value="카카오">카카오뱅크</SelectItem>
+                          <SelectItem value="신한">신한은행</SelectItem>
+                          <SelectItem value="토스">토스뱅크</SelectItem>
+                          <SelectItem value="우리">우리은행</SelectItem>
+                          <SelectItem value="하나">하나은행</SelectItem>
+                          <SelectItem value="기업">IBK기업은행</SelectItem>
+                          <SelectItem value="새마을">MG새마을금고</SelectItem>
+                          <SelectItem value="부산">부산은행</SelectItem>
+                          <SelectItem value="대구">대구은행</SelectItem>
+                          <SelectItem value="케이">케이뱅크</SelectItem>
+                          <SelectItem value="신협">신협</SelectItem>
+                          <SelectItem value="광주">광주은행</SelectItem>
+                          <SelectItem value="우체국">우체국</SelectItem>
+                          <SelectItem value="제일">SC제일은행</SelectItem>
+                          <SelectItem value="경남">경남은행</SelectItem>
+                          <SelectItem value="수협">수협은행</SelectItem>
+                          <SelectItem value="전북">전북은행</SelectItem>
+                          <SelectItem value="저축">저축은행</SelectItem>
+                          <SelectItem value="제주">제주은행</SelectItem>
+                          <SelectItem value="씨티">씨티은행</SelectItem>
+                          <SelectItem value="산림">산립조합</SelectItem>
+                          <SelectItem value="SBI">SBI저축은행</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Input
+                      value={inputs.Address}
+                      name={"Address"}
+                      onChange={onChange}
+                      className="mt-7 border-[1px] rounded-md"
+                      placeholder="주소"
+                      required
+                    />
+                    <div className="flex space-x-6 mt-7">
+                      <Input
+                        value={inputs.Height}
+                        name={"Height"}
+                        onChange={onChange}
+                        className="flex-1 border-[1px] rounded-md"
+                        placeholder="키(cm)"
+                        required
+                      />
+                      <Input
+                        value={inputs.Weight}
+                        name={"Weight"}
+                        onChange={onChange}
+                        className="flex-1 border-[1px] rounded-md"
+                        placeholder="체중(kg)"
+                        required
+                      />
+                    </div>
+                    <div className="flex space-x-6 mt-6">
                       <Select
                         required
                         onValueChange={(value: string) => {
@@ -280,7 +281,7 @@ const SignUp = () => {
                           });
                         }}
                       >
-                        <SelectTrigger className="mt-10">
+                        <SelectTrigger className="">
                           <SelectValue placeholder="성별" />
                         </SelectTrigger>
                         <SelectContent>
@@ -297,7 +298,7 @@ const SignUp = () => {
                           });
                         }}
                       >
-                        <SelectTrigger className="mt-10">
+                        <SelectTrigger className="">
                           <SelectValue placeholder="연령" />
                         </SelectTrigger>
                         <SelectContent>
@@ -310,13 +311,13 @@ const SignUp = () => {
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="flex justify-end">
-                      <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
-                        회원가입 <ChevronRight />
-                      </Button>
-                    </div>
-                  </form>
-                </div>
+                  </div>
+                  <div className="flex justify-end mt-4">
+                    <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
+                      회원가입 <ChevronRight />
+                    </Button>
+                  </div>
+                </form>
               </>
             )}
           </div>
