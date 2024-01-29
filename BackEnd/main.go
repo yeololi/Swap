@@ -1,25 +1,18 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/3boku/Swap/BackEnd/routes"
+	"github.com/joho/godotenv"
+	"log"
+	"os"
 )
 
-type User struct {
-	Name string `json:"name"`
-	Age  int    `json:"age"`
-}
-
 func main() {
-	router := gin.Default()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("failed to load env", err)
+	}
 
-	router.POST("/user", func(c *gin.Context) {
-		var user User
-		if err := c.BindJSON(&user); err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
-			return
-		}
-		c.JSON(200, gin.H{"name": user.Name, "age": user.Age})
-	})
-
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+	routes.NewRouter(port)
 }
