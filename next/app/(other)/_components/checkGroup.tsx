@@ -1,18 +1,10 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { CheckedState } from "@radix-ui/react-checkbox";
 import { Label } from "@radix-ui/react-label";
 import { Check } from "lucide-react";
 import Link from "next/link";
-import {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 
 const sampleList = [
   { id: "service", content: "서비스 이용 약관" },
@@ -24,7 +16,7 @@ const CheckGroup = () => {
   const [buttonColor, setButtonColor] = useState(false);
   const [allCheck, setAllCheck] = useState(false);
 
-  const checkAll = (e: any) => {
+  const checkAll = (e: React.MouseEvent<HTMLElement>) => {
     if (!allCheck || checkList.length === 1) {
       setCheckList(["service", "personal"]);
       setAllCheck(true);
@@ -34,7 +26,7 @@ const CheckGroup = () => {
     }
   };
 
-  const check = (e: ChangeEvent<HTMLInputElement>) => {
+  const check = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.checked
       ? setCheckList([...checkList, e.target.name])
       : setCheckList(checkList.filter((choice) => choice !== e.target.name));
@@ -72,6 +64,7 @@ const CheckGroup = () => {
             className="h-5 w-5"
             checked={checkList.includes(args.id) ? true : false}
             onChange={check}
+            required
           />
           <Label htmlFor={args.id} className="font-bold text-base">
             {args.content}
