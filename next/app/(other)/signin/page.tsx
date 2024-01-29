@@ -9,8 +9,8 @@ import SignUp from "../_components/signup";
 export default function SignIn() {
   return (
     <>
-      <div className="h-full w-full flex items-center justify-center bg-[#7D7D7D] ">
-        <div className="rounded-xl h-[30rem] w-[310px] flex flex-col bg-white items-center">
+      <div className="h-[100vh] w-full flex items-center justify-center bg-[#7D7D7D] ">
+        <div className="rounded-xl  w-[310px] flex flex-col bg-white items-center">
           <SignInForm>
             <SignUp />
           </SignInForm>

@@ -10,7 +10,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import CheckGroup from "./checkGroup";
 
 const SignUp = () => {
   return (
@@ -19,8 +20,8 @@ const SignUp = () => {
         <DrawerTrigger asChild>
           <Button className="bg-[#8CC444]">회원가입</Button>
         </DrawerTrigger>
-        <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+        <DrawerContent className="mb-8">
+          <div className="mx-auto w-full max-w-md">
             <DrawerHeader>
               <DrawerClose asChild>
                 <Button variant="ghost" size={"icon"}>
@@ -31,28 +32,36 @@ const SignUp = () => {
               <DrawerDescription>본인 정보를 입력해주세요</DrawerDescription>
             </DrawerHeader>
             <div>
-              <form action="">
-                <Input
-                  className="mt-5 border-b-[#BDE09E] border-b-2 rounded-none"
-                  placeholder="이름"
-                />
-                <div className="flex items-center mt-10 ">
+              <form action="" className="">
+                <div className="px-3">
                   <Input
-                    className="w-60 rounded-none border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
-                    placeholder="이메일"
+                    className="mt-5 border-x-0 border-t-0 border-b-[#BDE09E] border-b-2  rounded-none"
+                    placeholder="이름"
                   />
-                  <span className="mx-1">@</span>
-                  <Input className="flex-1 rounded-none border-b-[#BDE09E] border-b-2" />
+                  <div className="flex items-center mt-10 ">
+                    <Input
+                      className="w-60 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
+                      placeholder="이메일"
+                    />
+                    <span className="mx-1 text-xl">@</span>
+                    <Input className="flex-1 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2" />
+                  </div>
+                  <Input
+                    className="mt-10 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
+                    placeholder="비밀번호"
+                  />
                 </div>
-                <Input
-                  className="mt-10 rounded-none border-b-[#BDE09E] border-b-2"
-                  placeholder="비밀번호"
-                />
+
+                <CheckGroup />
               </form>
             </div>
 
             <DrawerFooter>
-              <Button>Submit</Button>
+              <div className="flex justify-end">
+                <Button className="flex justify-between">
+                  Submit <ChevronRight />
+                </Button>
+              </div>
             </DrawerFooter>
           </div>
         </DrawerContent>
