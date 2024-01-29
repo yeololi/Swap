@@ -76,19 +76,20 @@ const SignUp = () => {
 
     const email = inputs.Email1 + "@" + inputs.Email2;
 
-    console.log(inputs);
-
     //무결성 체크
     if (!/^[가-힣]+$/.test(inputs.name)) {
       console.log("이름이 한글이 아님!");
+      return;
     }
 
     if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(email)) {
       console.log("이메일이 형식에 맞지 않음!");
+      return;
     }
 
     if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/.test(inputs.Pw)) {
       console.log("비밀번호 형식에 맞지 않음!");
+      return;
     }
 
     // if (.test(inputs.Nickname)) {
@@ -97,28 +98,34 @@ const SignUp = () => {
 
     if (!/^[0-9]+$/.test(inputs.BankAccount)) {
       console.log("계좌번호가 숫자만이 아님!");
+      return;
     }
 
     if (!/^[0-9]+$/.test(inputs.Height)) {
       console.log("키가 숫자만이 아님!");
+      return;
     }
 
     if (!/^[0-9]+$/.test(inputs.Weight)) {
       console.log("몸무게가 숫자만이 아님!");
+      return;
     }
+
     const fetchData: dataType = {
       name: inputs.name,
       Email: email,
       Pw: inputs.Pw,
       Nickname: inputs.Nickname,
-      BankAccount: inputs.BankAccount,
+      BankAccount: Number(inputs.BankAccount),
       Bank: inputs.Bank,
       Address: inputs.Address,
-      Height: inputs.Height,
-      Weight: inputs.Weight,
+      Height: Number(inputs.Height),
+      Weight: Number(inputs.Weight),
       Gender: inputs.Gender,
-      Age: inputs.Age,
+      Age: Number(inputs.Age),
     };
+
+    console.log(fetchData);
   };
 
   return (
