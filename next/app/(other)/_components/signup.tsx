@@ -182,7 +182,7 @@ const SignUp = () => {
                   </DrawerDescription>
                 </DrawerHeader>
 
-                <form onSubmit={onSubmit} className="px-3">
+                <form onSubmit={onSubmit} className="px-3 z-[999]">
                   <div>
                     <Input
                       value={inputs.Nickname}
