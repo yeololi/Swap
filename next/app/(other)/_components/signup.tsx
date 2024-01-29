@@ -84,9 +84,9 @@ const SignUp = () => {
         </Drawer.Trigger>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px] z-50">
-            <div className="mx-auto w-full max-w-md">
-              {page == 1 ? (
+          <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px] z-50 overflow-auto">
+            <div className="mx-auto w-full max-w-md h-[470px]">
+              {page == 1 && (
                 <>
                   <div className="flex mt-4 ml-2">
                     <Drawer.Close asChild>
@@ -157,7 +157,8 @@ const SignUp = () => {
                     </div>
                   </form>
                 </>
-              ) : (
+              )}
+              {page == 2 && (
                 <>
                   <div className="flex mt-4 ml-2">
                     <div>
@@ -178,7 +179,13 @@ const SignUp = () => {
                   <Drawer.Description className="ml-6 m-3 text-[#7D7D7D]">
                     부가 정보를 입력해주세요
                   </Drawer.Description>
-                  <form onSubmit={onSubmit} className="px-3 z-[999]">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setPage(3);
+                    }}
+                    className="px-3 z-[999]"
+                  >
                     <div>
                       <Input
                         value={inputs.Nickname}
@@ -249,6 +256,38 @@ const SignUp = () => {
                         placeholder="주소"
                         required
                       />
+                    </div>
+                    <div className="flex justify-end mt-4">
+                      <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
+                        회원가입 <ChevronRight />
+                      </Button>
+                    </div>
+                  </form>
+                </>
+              )}
+              {page == 3 && (
+                <>
+                  <>
+                    <div className="flex mt-4 ml-2">
+                      <div>
+                        <Button
+                          variant="ghost"
+                          size={"icon"}
+                          onClick={() => {
+                            setPage(2);
+                          }}
+                        >
+                          <ChevronLeft />
+                        </Button>
+                      </div>
+                      <Drawer.Title className="text-[18px] font-medium flex items-center justify-center">
+                        회원가입
+                      </Drawer.Title>
+                    </div>
+                    <Drawer.Description className="ml-6 m-3 text-[#7D7D7D]">
+                      부가 정보를 입력해주세요
+                    </Drawer.Description>
+                    <form onSubmit={onSubmit} className="px-3 z-[999]">
                       <div className="flex space-x-6 mt-7">
                         <Input
                           value={inputs.Height}
@@ -307,13 +346,13 @@ const SignUp = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                    </div>
-                    <div className="flex justify-end mt-4">
-                      <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
-                        회원가입 <ChevronRight />
-                      </Button>
-                    </div>
-                  </form>
+                      <div className="flex justify-end mt-4">
+                        <Button className="flex justify-between text-[#8CC444] bg-white hover:bg-white">
+                          회원가입 <ChevronRight />
+                        </Button>
+                      </div>
+                    </form>
+                  </>
                 </>
               )}
             </div>
