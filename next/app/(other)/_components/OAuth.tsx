@@ -11,7 +11,7 @@ const sampleList = [
 const OAuth = () => {
   return (
     <>
-      <div className="flex-1 w-full h-full z-50 flex flex-col p-5 gap-2 mt-2">
+      <div className="flex-1 w-full h-full flex flex-col p-5 gap-2 mt-2">
         {sampleList.map((args, i) => (
           <Button
             key={i}
