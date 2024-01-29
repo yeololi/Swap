@@ -73,7 +73,52 @@ const SignUp = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const email = inputs.Email1 + "@" + inputs.Email2;
+
     console.log(inputs);
+
+    //무결성 체크
+    if (!/^[가-힣]+$/.test(inputs.name)) {
+      console.log("이름이 한글이 아님!");
+    }
+
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(email)) {
+      console.log("이메일이 형식에 맞지 않음!");
+    }
+
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/.test(inputs.Pw)) {
+      console.log("비밀번호 형식에 맞지 않음!");
+    }
+
+    // if (.test(inputs.Nickname)) {
+
+    // }
+
+    if (!/^[0-9]+$/.test(inputs.BankAccount)) {
+      console.log("계좌번호가 숫자만이 아님!");
+    }
+
+    if (!/^[0-9]+$/.test(inputs.Height)) {
+      console.log("키가 숫자만이 아님!");
+    }
+
+    if (!/^[0-9]+$/.test(inputs.Weight)) {
+      console.log("몸무게가 숫자만이 아님!");
+    }
+    const fetchData: dataType = {
+      name: inputs.name,
+      Email: email,
+      Pw: inputs.Pw,
+      Nickname: inputs.Nickname,
+      BankAccount: inputs.BankAccount,
+      Bank: inputs.Bank,
+      Address: inputs.Address,
+      Height: inputs.Height,
+      Weight: inputs.Weight,
+      Gender: inputs.Gender,
+      Age: inputs.Age,
+    };
   };
 
   return (
@@ -132,6 +177,7 @@ const SignUp = () => {
                           name={"Email2"}
                           onChange={onChange}
                           className="flex-1 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
+                          placeholder="email.com"
                           required
                         />
                       </div>
