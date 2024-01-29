@@ -17,11 +17,11 @@ import React, { useState } from "react";
 import CheckGroup from "./checkGroup";
 import { Drawer } from "vaul";
 
-//   ID    string `json:"id" gorm:"type:char(36);"`
+// ID          string `json:"id" gorm:"type:char(36);"`
 // Email       string `json:"email"`
 // Pw          string `json:"pw"`
 // Nickname    string `json:"nickname"`
-// BankAccount int64  `json:"bank_account"`
+// Bank_account int64  `json:"bank_account"`
 // Bank        string `json:"bank"`
 // Address     string `json:"address"`
 // Height      int    `json:"height"`
@@ -30,34 +30,34 @@ import { Drawer } from "vaul";
 // Age         int    `json:"age"`
 
 interface dataType {
-  Email: string;
-  Pw: string;
-  name: string;
-  Nickname: string;
-  BankAccount: number;
-  Bank: string;
-  Address: string;
-  Height: number;
-  Weight: number;
-  Gender: string;
-  Age: number;
+  email: string;
+  pw: string;
+  // name: string;
+  nickname: string;
+  bank_account: number;
+  bank: string;
+  address: string;
+  height: number;
+  weight: number;
+  gender: string;
+  age: number;
 }
 
 const SignUp = () => {
   const [page, setPage] = useState(1);
   const [inputs, setInputs] = useState({
-    Email1: "",
-    Email2: "",
-    Pw: "",
+    email1: "",
+    email2: "",
+    pw: "",
     name: "",
-    Nickname: "",
-    BankAccount: "",
-    Bank: "",
-    Address: "",
-    Height: "",
-    Weight: "",
-    Gender: "",
-    Age: "",
+    nickname: "",
+    bank_account: "",
+    bank: "",
+    address: "",
+    height: "",
+    weight: "",
+    gender: "",
+    age: "",
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,10 +71,10 @@ const SignUp = () => {
     setInputs(nextInputs);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const email = inputs.Email1 + "@" + inputs.Email2;
+    const email = inputs.email1 + "@" + inputs.email2;
 
     //무결성 체크
     if (!/^[가-힣]+$/.test(inputs.name)) {
@@ -87,45 +87,55 @@ const SignUp = () => {
       return;
     }
 
-    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/.test(inputs.Pw)) {
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/.test(inputs.pw)) {
       console.log("비밀번호 형식에 맞지 않음!");
       return;
     }
 
-    // if (.test(inputs.Nickname)) {
+    // if (.test(inputs.nickname)) {
 
     // }
 
-    if (!/^[0-9]+$/.test(inputs.BankAccount)) {
+    if (!/^[0-9]+$/.test(inputs.bank_account)) {
       console.log("계좌번호가 숫자만이 아님!");
       return;
     }
 
-    if (!/^[0-9]+$/.test(inputs.Height)) {
+    if (!/^[0-9]+$/.test(inputs.height)) {
       console.log("키가 숫자만이 아님!");
       return;
     }
 
-    if (!/^[0-9]+$/.test(inputs.Weight)) {
+    if (!/^[0-9]+$/.test(inputs.weight)) {
       console.log("몸무게가 숫자만이 아님!");
       return;
     }
 
     const fetchData: dataType = {
-      name: inputs.name,
-      Email: email,
-      Pw: inputs.Pw,
-      Nickname: inputs.Nickname,
-      BankAccount: Number(inputs.BankAccount),
-      Bank: inputs.Bank,
-      Address: inputs.Address,
-      Height: Number(inputs.Height),
-      Weight: Number(inputs.Weight),
-      Gender: inputs.Gender,
-      Age: Number(inputs.Age),
+      // name: inputs.name,
+      email: email,
+      pw: inputs.pw,
+      nickname: inputs.nickname,
+      bank_account: Number(inputs.bank_account),
+      bank: inputs.bank,
+      address: inputs.address,
+      height: Number(inputs.height),
+      weight: Number(inputs.weight),
+      gender: inputs.gender,
+      age: Number(inputs.age),
     };
 
     console.log(fetchData);
+
+    try {
+      const res = await fetch("http://localhost:8080/signup", {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+        body: JSON.stringify(fetchData),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -171,8 +181,8 @@ const SignUp = () => {
                       />
                       <div className="flex items-center">
                         <Input
-                          value={inputs.Email1}
-                          name={"Email1"}
+                          value={inputs.email1}
+                          name={"email1"}
                           onChange={onChange}
                           className="w-52 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2 placeholder:font-semibold"
                           placeholder="이메일"
@@ -180,8 +190,8 @@ const SignUp = () => {
                         />
                         <span className="mx-1 text-xl">@</span>
                         <Input
-                          value={inputs.Email2}
-                          name={"Email2"}
+                          value={inputs.email2}
+                          name={"email2"}
                           onChange={onChange}
                           className="flex-1 rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
                           placeholder="email.com"
@@ -190,8 +200,8 @@ const SignUp = () => {
                       </div>
                       <Input
                         type={"password"}
-                        value={inputs.Pw}
-                        name={"Pw"}
+                        value={inputs.pw}
+                        name={"pw"}
                         onChange={onChange}
                         className="rounded-none border-x-0 border-t-0 border-b-[#BDE09E] border-b-2"
                         placeholder="비밀번호"
@@ -241,8 +251,8 @@ const SignUp = () => {
                   >
                     <div>
                       <Input
-                        value={inputs.Nickname}
-                        name={"Nickname"}
+                        value={inputs.nickname}
+                        name={"nickname"}
                         onChange={onChange}
                         className="border-[1px] rounded-md"
                         placeholder="닉네임"
@@ -250,8 +260,8 @@ const SignUp = () => {
                       />
                       <div className="flex items-center mt-7 ">
                         <Input
-                          value={inputs.BankAccount}
-                          name={"BankAccount"}
+                          value={inputs.bank_account}
+                          name={"bank_account"}
                           onChange={onChange}
                           className="w-56 border-[1px] rounded-md placeholder:font-semibold mr-6"
                           placeholder="계좌번호"
@@ -262,7 +272,7 @@ const SignUp = () => {
                           onValueChange={(value: string) => {
                             setInputs({
                               ...inputs,
-                              ["Bank"]: value,
+                              ["bank"]: value,
                             });
                           }}
                           required
@@ -302,8 +312,8 @@ const SignUp = () => {
                         </Select>
                       </div>
                       <Input
-                        value={inputs.Address}
-                        name={"Address"}
+                        value={inputs.address}
+                        name={"address"}
                         onChange={onChange}
                         className="mt-7 border-[1px] rounded-md"
                         placeholder="주소"
@@ -343,16 +353,16 @@ const SignUp = () => {
                     <form onSubmit={onSubmit} className="px-3 z-[999]">
                       <div className="flex space-x-6 mt-7">
                         <Input
-                          value={inputs.Height}
-                          name={"Height"}
+                          value={inputs.height}
+                          name={"height"}
                           onChange={onChange}
                           className="flex-1 border-[1px] rounded-md"
                           placeholder="키(cm)"
                           required
                         />
                         <Input
-                          value={inputs.Weight}
-                          name={"Weight"}
+                          value={inputs.weight}
+                          name={"weight"}
                           onChange={onChange}
                           className="flex-1 border-[1px] rounded-md"
                           placeholder="체중(kg)"
@@ -365,7 +375,7 @@ const SignUp = () => {
                           onValueChange={(value: string) => {
                             setInputs({
                               ...inputs,
-                              ["Gender"]: value,
+                              ["gender"]: value,
                             });
                           }}
                         >
@@ -382,7 +392,7 @@ const SignUp = () => {
                           onValueChange={(value: string) => {
                             setInputs({
                               ...inputs,
-                              ["Age"]: value,
+                              ["age"]: value,
                             });
                           }}
                         >
